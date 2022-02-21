@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
    
-    <title>kontakt</title>
+    <title>Registreerumine</title>
 
     <%- include("../partials/pais.ejs") %>
-    <link rel="stylesheet" href="kontakt.css">
+    <link rel="stylesheet" href="matkaklubi.css">
 
 </head>
 <body>
@@ -22,6 +22,15 @@
             <%- include("../partials/menyy.ejs") %>
             </div>
         </div>
+
+
+        <h1>Registreerumine matkale <%= matk.nimetus %> </h1>
+        <img class="reg-pilt" src="<%= matk.pildiURL %>" alt="">
+        <p>
+            <%= matk.kirjeldus %>
+        </p>
+
+
         <h3>Jätke meile oma kontaktandmed ja võtame teiega esimesel võimalusel ühendust</h3>
 
             <div class="entry mb-4">
@@ -46,9 +55,6 @@
         </div>
         
         </div>
-
-        <script src="kontakt.js"></script>
-
 
 </body>
 </html>

@@ -43,7 +43,7 @@
 
 .logo {
     height: 100px;
-    width: 100px;
+    width: 200px;
 }
 
 .paisSektsioon-pealkirjad {
@@ -133,3 +133,8 @@
     }
 }
 
+.reg-pilt {
+    width: 80%;
+    height: 300px;
+    margin-bottom: 20px;
+}
