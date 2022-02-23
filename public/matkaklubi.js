@@ -19,6 +19,8 @@ let uudis3 = {
             <img class="card-img-top" src="${uudis.pilt}"
             <div class="card-body">
                 <div class="card-title">${uudis.tutvustus}</div>
+                <br>
+                <a class="btn btn-primary" href="#">Uuri lisaks</a>
             </div>
             </div>
         `

@@ -6,7 +6,7 @@ const matk1 = {
   id: 0,
   nimetus: "Suusamatk Kiviõlis",
   kirjeldus: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eligendi accusantium ullam, earum, quis aliquid deserunt molestiae corrupti temporibus iusto, asperiores iste itaque! Debitis velit quasi rem ipsa libero quisquam.",
-  pildiURL: "./assets-matk/matka-uudis3.jpg",
+  pildiURL: "/assets-matk/matka-uudis3.jpg",
   osalejad: ['mati@matkaja.ee', 'kati@matkaja.ee']
 }
 
@@ -14,7 +14,7 @@ const matk2 = {
   id: 1,
   nimetus: "Reis Alpidesse",
   kirjeldus: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eligendi accusantium ullam, earum, quis aliquid deserunt molestiae corrupti temporibus iusto, asperiores iste itaque! Debitis velit quasi rem ipsa libero quisquam.",
-  pildiURL: "./assets-matk/matka-uudis1.jpg",
+  pildiURL: "/assets-matk/matka-uudis1.jpg",
   osalejad: ['klaabu@suurmeri.ee']
 }
 
@@ -22,7 +22,7 @@ const matk3 = {
   id: 2,
   nimetus: "Suusasõit Kõrvemaal",
   kirjeldus: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eligendi accusantium ullam, earum, quis aliquid deserunt molestiae corrupti temporibus iusto, asperiores iste itaque! Debitis velit quasi rem ipsa libero quisquam.",
-  pildiURL: "./assets-matk/matka-uudis2.jpg",
+  pildiURL: "/assets-matk/matka-uudis2.jpg",
   osalejad: ['kevin@gmail.com']
 }
 
