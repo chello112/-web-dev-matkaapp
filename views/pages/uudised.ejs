@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Uudised</title>
+    <title>Uudised</title>
 
-  <%- include("../partials/pais.ejs") %>
+    <%- include("../partials/pais.ejs") %>
 
-    <link rel="stylesheet" href="uudised.css">
-  
+        <link rel="stylesheet" href="uudised.css">
+
 </head>
+
 <body>
 
     <div class="container">
@@ -19,18 +21,30 @@
                 </div>
             </div>
             <div class="col-12 col-md-7 pais-menyy">
-            <%- include("../partials/menyy.ejs") %>
+                <%- include("../partials/menyy.ejs") %>
             </div>
         </div>
 
-<div class="jumbotron text-center">
-  <h1>Uudised</h1>
-</div>
+        <div class="jumbotron text-center">
+            <h1>Uudised</h1>
+       
 
-<div id="valjund"></div>
+            <div class="row">
+                <% for (let i=0; i<uudised.length; i++) { %>
+                <div class="col-12 col-md-4">
+                    <img class="card-img-top" src=" <%= uudised[i].pilt %>">
+                    <div class="card-title">
+                        <%= uudised[i].tutvustus %>
+                    </div>
+                    <br>
+                    <a class="btn btn-primary" href="#">Uuri lisaks</a>
+                </div>
+                <%  } %>
+            </div>
+     
 
 
-</div>
-<script src="matkaklubi.js"></script>
+    </div>
 </body>
+
 </html>

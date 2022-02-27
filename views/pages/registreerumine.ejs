@@ -29,28 +29,30 @@
             <%= matk.kirjeldus %>
         </p>
 
-
         <h3>Jätke meile oma kontaktandmed ja võtame teiega esimesel võimalusel ühendust</h3>
-
-            <div class="entry mb-4">
-            <div>
+      
+        <div class="row">
+        <form action="/kinnitus" method="get">
+            <div class="formGroup">
                 <label for="email">Email</label>
-                <input type="email" id="email">
+                <input type="email" class="form-control" id="email" name="email">
                 </div>
-        
-                <div>
+                <div class="formGroup">
                 <label for="nimi">Nimi</label>
-                <input type="text" id="nimi">
+                <input type="text" class="form-control" id="nimi" name="nimi">
             </div>
         
-            <div>
+            <div class="formGroup">
                 <label for="Teade">Teade</label>
-                <input type="text" id="teade">
+                <input type="text" class="form-control" id="teade" name="teade">
             </div>
-            <button onclick="lisaKontakt()" type="button" class="mt-2 btn btn-success">Lisa kontaktandmed</button>
-            </div>
+           <input type="hidden" name="matkaId" value="<%= matk.id %>">
+           <input type="submit" class="btn btn-primary" value="saada">
+           
             <br>
             <div id="valjund"></div>
+            </form>
+        </div>
         </div>
         
         </div>
