@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Täpsemalt uudisest</title>
+
+    <%- include("../partials/pais.ejs") %>
+
+    <div class="container">
+        <div class="row pt-1">
+            <div class="col-12 col-md-5 d-flex">
+                <img class="logo" src="/assets-matk/matkalogo.jpg" alt="">
+                <div class="paisnimi">
+                    MATKA KLUBI
+                </div>
+            </div>
+            <div class="col-12 col-md-7 pais-menyy">
+            <%- include("../partials/menyy.ejs") %>
+            </div>
+        </div>
+
+</head>
+<body>
+    
+    <div class="row">
+     
+        <div class="col-12">
+            <img class="card-img-top" src=" <%= uudis.pilt %>">
+            <div class="card-title">
+                <%= uudis.tutvustus %> 
+                <br>
+                <%= uudis.sisu %>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    </body>
+    </html>

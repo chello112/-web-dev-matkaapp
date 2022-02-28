@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="uudised.css">
 
 </head>
-
 <body>
 
     <div class="container">
@@ -29,15 +28,19 @@
             <h1>Uudised</h1>
        
 
+            
+
             <div class="row">
                 <% for (let i=0; i<uudised.length; i++) { %>
                 <div class="col-12 col-md-4">
                     <img class="card-img-top" src=" <%= uudised[i].pilt %>">
                     <div class="card-title">
-                        <%= uudised[i].tutvustus %>
+                        <%= uudised[i].tutvustus %> 
                     </div>
                     <br>
-                    <a class="btn btn-primary" href="#">Uuri lisaks</a>
+                   
+                    <a class="btn btn-primary" href="/uudiseSisu/<%= uudised [i].id %>">Loe lähemalt</a>
+
                 </div>
                 <%  } %>
             </div>
