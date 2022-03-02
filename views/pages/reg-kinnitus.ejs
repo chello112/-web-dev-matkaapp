@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Registreerumine</title>
+
+    <%- include("../partials/pais.ejs") %>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row pt-1">
+            <div class="col-12 col-md-5 d-flex">
+                <img class="logo" src="/assets-matk/matkalogo.jpg" alt="">
+                <div class="paisnimi">
+                    MATKA KLUBI
+                </div>
+            </div>
+            <div class="col-12 col-md-7 pais-menyy">
+            <%- include("../partials/menyy.ejs") %>
+            </div>
+        </div>
+
+
+        <h1>Registreerumine matkale <%= matk.nimetus %> õnnestus </h1>
+        <img class="reg-pilt" src="<%= matk.pildiURL %>" alt="">
+        <p>
+            <%= matk.kirjeldus %>
+        </p>
+
+        <div>
+            <div>Matkale registreerumine õnnestus</div>
+            <a href="/" class="btn btn-primary">Tagasi esilehele</a>
+        </div>
+
+        </div>
+
+</body>
+</html>

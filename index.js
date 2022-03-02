@@ -1,13 +1,21 @@
 const express = require('express')
+const { MongoClient } = require('mongodb')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+
+
+const salasona = "20011992Eku"
+const andmebaas = "matkaApp"
+const mongoURL = `mongodb+srv://matka-app:${salasona}@cluster0.kti3z.mongodb.net/${andmebaas}?retryWrites=true&w=majority`
+
+const client = new MongoClient(mongoURL)
 
 const matk1 = {
   id: 0,
   nimetus: "Lauasõit Kiviõlis",
   kirjeldus: "Baltikumi pikimate nõlvadega suusakeskuses ootavad Sind neli 400-700 meetrist suusanõlva ning kaks õppenõlva “magic carpet” tõstukiga, kus tänu radade profiilile saad korraga nautida nii kiirust kui ka radade laiust. Lisaks pakub palju rõõmu tasemel lumepark oma erinevate hüpete ja obstaaklitega.",
   pildiURL: "/assets-matk/lauasoit-kiviolis.jpg",
-  osalejad: ['mati@matkaja.ee', 'kati@matkaja.ee']
+  osalejad: []
 }
 
 const matk2 = {
@@ -15,7 +23,7 @@ const matk2 = {
   nimetus: "Reis Alpidesse",
   kirjeldus: "Alpide suusanõlvad tutvustamist ei vaja - suurepärased rajad, off-piste puuder ja seda ümbritsev melu. Seekord võtame sihiks ühe populaarseima kuurorti, mis asub Prantsusmaal: La Plagne. Kolmest keskusest (La Plagne, Les Arcs ja Peisey-Vallandry) koosnevas Paradiski kuurortis on radu igale tasemele ja kokku 425 km puhast sõidurõõmu! Sobib nii algajatele - terve kuurorti saab läbida sinise raskusega radadega - kui ka kogenud sõitjatele. Lisaks imelistele suusaradadele leidub hulgaliselt baare ja restorane, kus suusatamise vahepeal teha kosutav söögipaus või pärast pikka suusapäeva keerutada õlleklaasiga jalga after-ski’l.",
   pildiURL: "/assets-matk/reis-alpidesse.jpg",
-  osalejad: ['klaabu@suurmeri.ee']
+  osalejad: []
 }
 
 const matk3 = {
@@ -23,7 +31,7 @@ const matk3 = {
   nimetus: "Suusasõit Kõrvemaal",
   kirjeldus: "Sportland Kõrvemaa Matka- ja Suusakeskus asub keset Põhja-Kõrvemaa imekaunist loodust ja ühendab endas matka- ja sportimisvõimalused seminaride, kokkutulekute ning saunaõhtute pidamisega. Nii suured  kui väikesed külalised on oodatud aastaringselt!",
   pildiURL: "/assets-matk/suusasoit-korvemaal.jpg",
-  osalejad: ['kevin@gmail.com']
+  osalejad: []
 }
 
 matkad = [
@@ -75,7 +83,7 @@ function naitaUudist(req, res) {
 
 
 
-function registreeriOsaleja(req, res) {
+async function registreeriOsaleja(req, res) {
   console.log("Serverisse saadeti parameetrid:")
   console.log(req.query)
 
@@ -108,12 +116,42 @@ const uusMatkaja = {
 }
 
 
-matkajad.push(uusMatkaja)
+matkajad.push(uusMatkaja) 
 matk.osalejad.push(uusMatkaja.email)
 
 console.log("Kõik matkajad:")
 console.log(matkajad)
-res.send("Registreeritud!")
+res.render("pages/reg-kinnitus", {matk: matk})
+
+await client.connect()   ///////////////////////////////////Tunnis tehtud
+const database = client.db(andmebaas) 
+const registreerumised = database.collection("registreerumised")
+const tulemus = await registreerumised.insertOne(uusMatkaja) //Mongo db käsklus lisamiseks
+console.log("Lisati uus matkaja: " + tulemus.insertedId)
+
+res.render("pages/reg-kinnitus", {matk: matk})
+}
+
+function tagastaMatkad(req, res) {
+  res.send(matkad)
+}
+
+async function tagastaOsalejad(req, res) {
+  let matkaIndeks = req.params.matk
+  await client.connect()   ///////////////////////////////////Tunnis tehtud
+const database = client.db(andmebaas) 
+const registreerumised = database.collection("registreerumised")
+
+const filter = {
+  id: matkaIndeks
+}
+
+
+let vastusMassiiv = await registreerumised.find(filter).toArray()
+client.close()
+
+
+ res.send(vastusMassiiv)
 }
 
 
@@ -121,15 +159,13 @@ express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-
   .get('/', (req, res) => res.render('pages/index', {matkad: matkad}))
-
   .get('/uudised', (req, res) => res.render('pages/uudised', {uudised: uudised})) 
   .get('/uudiseSisu/:uudis', naitaUudist)
-
   .get('/kontakt', (req, res) => res.render('pages/kontakt'))
-
   .get('/registreerumine/:matk', naitaRegistreerimist)
   .get('/kinnitus', registreeriOsaleja)
+  .get('/api/matk', tagastaMatkad)
+  .get('/api/matkaja/:matk', tagastaOsalejad)
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
