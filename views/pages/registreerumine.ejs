@@ -1,61 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   
-    <title>Registreerumine</title>
-
-    <%- include("../partials/pais.ejs") %>
-
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
     
-    <div class="container">
-        <div class="row pt-1">
-            <div class="col-12 col-md-5 d-flex">
-                <img class="logo" src="/assets-matk/matkalogo.jpg" alt="">
-                <div class="paisnimi">
-                    MATKA KLUBI
+        <title>Registreerumine</title>
+
+        <%- include("../partials/pais.ejs") %>
+
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="row pt-1">
+                <div class="col-12 col-md-5 d-flex">
+                    <img class="logo" src="/assets-matk/matkalogo.jpg" alt="">
+                    <div class="paisnimi">
+                        MATKA KLUBI
+                    </div>
+                </div>
+                <div class="col-12 col-md-7 pais-menyy">
+                <%- include("../partials/menyy.ejs") %>
                 </div>
             </div>
-            <div class="col-12 col-md-7 pais-menyy">
-            <%- include("../partials/menyy.ejs") %>
-            </div>
-        </div>
 
+        
 
-        <h1>Registreerumine matkale <%= matk.nimetus %> </h1>
-        <img class="reg-pilt" src="<%= matk.pildiURL %>" alt="">
-        <p>
-            <%= matk.kirjeldus %>
-        </p>
-
-        <h3>Jätke meile oma kontaktandmed ja võtame teiega esimesel võimalusel ühendust</h3>
-      
-        <div class="row">
-        <form action="/kinnitus" method="get">
-            <div class="formGroup">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+            <div class="row">
+                <div class="col-7">
+            <h1>Registreerumine matkale: <%= matk.nimetus %> </h1>
+            <img class="reg-pilt" src="<%= matk.pildiURL %>" alt="">
+            <p>
+                <%= matk.kirjeldus %>
+                </p>
                 </div>
+
+                <div class="col-5">
+            <h3>Jätke meile oma kontaktandmed ja võtame teiega esimesel võimalusel ühendust</h3>
+        
+            
+            <form action="/kinnitus" method="get">
                 <div class="formGroup">
-                <label for="nimi">Nimi</label>
-                <input type="text" class="form-control" id="nimi" name="nimi">
-            </div>
-        
-            <div class="formGroup">
-                <label for="Teade">Teade</label>
-                <input type="text" class="form-control" id="teade" name="teade">
-            </div>
-           <input type="hidden" name="matkaId" value="<%= matk.id %>">
-           <input type="submit" class="btn btn-primary" value="saada">
-           
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="formGroup">
+                    <label for="nimi">Nimi</label>
+                    <input type="text" class="form-control" id="nimi" name="nimi">
+                </div>
+            
+                <div class="formGroup">
+                    <label for="Teade">Teade</label>
+                    <input type="text" class="form-control" id="teade" name="teade">
+                </div>
+            <input type="hidden" name="matkaId" value="<%= matk.id %>">
             <br>
-            <div id="valjund"></div>
-            </form>
+            <input type="submit" class="btn btn-primary" value="saada">
+                </form>
+            </div>
+            </div>
         </div>
-        </div>
-        
-        </div>
+            </div>
 
-</body>
-</html>
+    </body>
+    </html>

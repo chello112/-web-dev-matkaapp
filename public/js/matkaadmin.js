@@ -12,7 +12,9 @@ function naitaMatkadeMenyyd(matkad) {
     for (let i in matkad) {
         vastus += `
         <button class="btn btn-link" onClick="naitaOsaleijaid(${matkad[i].id})">
-          ${matkad[i].nimetus}
+            <ul>       
+                <li>${matkad[i].nimetus}</li>    
+            </ul>  
         </button>
         `
     }
@@ -31,28 +33,44 @@ async function naitaOsaleijaid(matkaIndeks) {
 
     let vastus = ''
     vastus += `
+    <h3>Matka kirjeldus:</h3>
     <div class="pb-2">
         ${matk.kirjeldus}
     </div>
-    <div class="row">
-        <div class="col-4">Email</div>
-        <div class="col-8">Nimi</div>
-    </div>
     `
-
    
     for (i in osalejad) {
         vastus += `
-       
-        <div class="row">
-            <div class="col-4">${osalejad[i].email}</div>
-            <div class="col-8">${osalejad[i].nimi}</div>
-            <div class="col-12">${osalejad[i].teade}</div>
-        </div>    
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Nimi</th>
+    <th>Teade</th>
+  </tr>
+  <tr>
+    <td>${osalejad[i].email}</td>
+    <td>${osalejad[i].nimi}</td>
+    <td>${osalejad[i].teade}</td>
+    ${osalejad.teade}
+    <a href="#" class="btn btn-link" onClick="kustutaOsaleja('${osalejad[i]._id}')">
+    Kustuta
+    </a>
+  </tr>
+
+</table>
         `
     }
     const matkajadElement = document.getElementById("matka-andmed")
     matkajadElement.innerHTML = vastus
+}
+
+async function kustutaOsaleja(id) {
+    console.log("Kustuta: " + id)
+    let response = await fetch('/api/osalejad/' + id, {method: 'DELETE'})
+    tulemus = await response.json()
+    console.log(tulemus)
+    loeMatkad()
 }
 
 loeMatkad()
